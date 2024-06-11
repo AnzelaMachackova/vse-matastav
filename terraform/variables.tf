@@ -18,9 +18,9 @@ variable "location" {
   default     = "EU"
 }
 
-variable "bq_dataset_name_l1" {
+variable "bq_dataset_name_stage" {
   description = "My BigQuery Dataset Name"
-  default     = "l1"
+  default     = "stage"
 }
 
 
