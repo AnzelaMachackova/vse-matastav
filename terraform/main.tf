@@ -31,8 +31,8 @@ resource "google_storage_bucket" "vse-matastav_storage" {
 }
 
 
-resource "google_bigquery_dataset" "l1" {
-  dataset_id = var.bq_dataset_name_l1
+resource "google_bigquery_dataset" "stage" {
+  dataset_id = var.bq_dataset_name_stage
   location   = var.location
 }
 
