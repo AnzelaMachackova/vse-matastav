@@ -10,3 +10,6 @@ crash.log
 crash.*.log
 
 *.mdb
+
+*logs
+__pycache__
