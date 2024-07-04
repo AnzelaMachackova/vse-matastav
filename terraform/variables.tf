@@ -18,15 +18,15 @@ variable "location" {
   default     = "EU"
 }
 
-variable "bq_dataset_name_stage" {
+variable "bq_dataset_name_L1" {
   description = "My BigQuery Dataset Name"
-  default     = "stage"
+  default     = "L1"
 }
 
 
-variable "bq_dataset_name_report" {
+variable "bq_dataset_name_L2" {
   description = "My BigQuery Dataset Name"
-  default     = "report"
+  default     = "L2"
 }
 
 variable "gcs_bucket_name" {
