@@ -13,3 +13,5 @@ crash.*.log
 
 *logs
 __pycache__
+
+*links.sh
