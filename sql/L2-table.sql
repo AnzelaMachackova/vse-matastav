@@ -25,8 +25,7 @@ ON zam.idfce = fce.idfce;
 
 -- transakce
 CREATE OR REPLACE TABLE L2.L2_transakce AS
-SELECT tr.id_transakce,
-       tr.idpol,
+SELECT tr.idpol,
        IFNULL(CAST(tr.id_pobocka AS STRING), "(not set)") as id_pobocka,
        tr.datum,
        IFNULL(CAST(tr.id_kontrakt AS STRING), "(not set)") as id_kontrakt,

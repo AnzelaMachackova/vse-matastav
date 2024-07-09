@@ -280,7 +280,7 @@ SET datum =  TIMESTAMP(
               SUBSTR(CAST(datum AS STRING), 5)
               )
           )
-WHERE EXTRACT(YEAR FROM datum) <= 21;
+WHERE EXTRACT(YEAR FROM datum) <= 22;
 
 -- kontrakt
 CREATE OR REPLACE TABLE `L1.L1_kontrakt` AS
@@ -313,7 +313,7 @@ SET datumdo =  TIMESTAMP(
               SUBSTR(CAST(datumdo AS STRING), 5)
               )
           )
-WHERE EXTRACT(YEAR FROM datumdo) <= 21;
+WHERE EXTRACT(YEAR FROM datumdo) <= 22;
 
 UPDATE `L1.L1_kontrakt`
 SET datumod =  TIMESTAMP(
