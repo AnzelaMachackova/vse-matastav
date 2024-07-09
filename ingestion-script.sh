@@ -1,21 +1,6 @@
-# script for creating external tables in BigQuery from Google Sheets
-bq mkdef \
-   --autodetect \
-   --source_format='GOOGLE_SHEETS' \
-   'https://docs.google.com/spreadsheets/d/id' > /tmp/t_kontrakty_test
-
-bq mk \
---external_table_definition=/tmp/t_kontrakty_test \
-L0.t_kontrakty_test
-
-# script for creating external tables in BigQuery from multiple Google Sheets 
+# script for creating tables in BigQuery from bucket
+BUCKET_NAME="vse-matastav-bucket"
 DATASET="L0"
-
-declare -a sheets=(
-    "https://docs.google.com/spreadsheets/d/id1"
-    "https://docs.google.com/spreadsheets/d/id2"
-    "https://docs.google.com/spreadsheets/d/id3"
-)
 
 declare -a tables=(
     "t_kontrakty"
@@ -43,21 +28,28 @@ declare -a tables=(
     "t_vydaje_najem_skutecnost"
     "t_vydaje_najem_plan"
     "t_vydaje_zdroje_plan"
-    "pomMesic"
     "pomTok"
     "t_prijmy_skutecnost"
     "t_zdroje"
     "t_Kraje"
     "pomVcas"
     "t_vydaje_mzdy_plan"
-    "t_zamestnanci"
 )
 
-array_length=${#sheets[@]}
+array_length=${#tables[@]}
 
 for (( i=0; i<${array_length}; i++ )); do
-    bq mkdef --autodetect --source_format='GOOGLE_SHEETS' "${sheets[$i]}" > "/tmp/${tables[$i]}_def"
-    
-    bq mk --external_table_definition="/tmp/${tables[$i]}_def" "${DATASET}.${tables[$i]}"
+    table=${tables[i]}
+    echo "Loading data into $DATASET.$table from gs://$BUCKET_NAME/raw/${table}.csv"
+    bq load --autodetect --source_format=CSV "$DATASET.$table" "gs://$BUCKET_NAME/raw/${table}.csv"
 done
 
+# 
+BUCKET_NAME="vse-matastav-bucket"
+
+bq load \
+--source_format=CSV \
+--skip_leading_rows=1 \
+--schema="idzam:INTEGER,Prijmeni:STRING,Jmeno:STRING,Titul:STRING,Plat:INTEGER,Nadrizeny:INTEGER,idpob:INTEGER,idfce:INTEGER,foto:STRING" \
+L0.t_zamestnanci \
+"gs://$BUCKET_NAME/raw/t_zamestnanci.csv"
