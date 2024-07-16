@@ -1,5 +1,5 @@
 # script for creating tables in BigQuery from bucket
-BUCKET_NAME="vse-matastav-bucket"
+BUCKET_NAME="bucket-vse-course"
 DATASET="L0"
 
 declare -a tables=(
@@ -34,6 +34,7 @@ declare -a tables=(
     "t_Kraje"
     "pomVcas"
     "t_vydaje_mzdy_plan"
+    "t_zamestnanci"
 )
 
 array_length=${#tables[@]}
